@@ -11,10 +11,15 @@ export class DashboardComponent implements OnInit {
 
   employees:Employee[] = []
 
-  constructor(private services:EmployeeService) { }
+  constructor(private service:EmployeeService) { }
 
   ngOnInit(): void {
-    this.employees =  this.services.getEmployees();
+    this.employees =  this.service.getEmployees();
   }
 
+  deleteEmployee(empName:string) {
+    this.service.deleteEmployee(empName);
+    console.log("deleted employee...");
+    this.ngOnInit();
+  }
 }

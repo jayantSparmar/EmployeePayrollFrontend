@@ -9,7 +9,7 @@ import { EmployeeService } from 'src/app/services/employee.service';
 })
 export class AddComponent implements OnInit {
   
-  constructor(private services:EmployeeService) { }
+  constructor(private service:EmployeeService) { }
 
   ngOnInit(): void {
   }
@@ -23,6 +23,8 @@ export class AddComponent implements OnInit {
 
   insert(employee:any) {
     alert(employee.name);
-    this.services.addEmployee(employee);
+    //console.log(employee);
+    this.service.addEmployee(employee);
   }
+
 }
