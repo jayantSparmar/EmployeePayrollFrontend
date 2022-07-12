@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Employee } from '../model/employee';
 
 @Injectable({
@@ -6,17 +8,24 @@ import { Employee } from '../model/employee';
 })
 export class EmployeeService {
 
-   private employee:Employee[] = [];
+   private baseUrl:string = "http://localhost:8080/employeepayrollservice"
 
-  constructor() { }
+  constructor(private http:HttpClient ) { }
 
-  addEmployee(employee:any) {
-    this.employee.unshift(employee);
-    console.log(this.employee)
+  addEmployee(employee:any): Observable<any> {
+    return this.http.post(this.baseUrl + "/create", employee);
   }
 
-  getEmployees() {
-    return this.employee;
+  getEmployees(): Observable<any> {
+    return this.http.get(this.baseUrl + "/get");
   }
 
-}
+  deleteEmployee(employeeId: number): Observable<any> {
+    return this.http.delete(this.baseUrl + "/delete/" + employeeId);
+  }
+
+  updateEmployee(employee : any, employeeId: number) : Observable<any> {
+    return this.http.put(this.baseUrl + "/update/" + employeeId, employee);
+  }
+
+  }

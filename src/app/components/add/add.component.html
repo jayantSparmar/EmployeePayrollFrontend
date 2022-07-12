@@ -1,7 +1,7 @@
-<div>Form Value : {{employeeform.value | json}}</div>
+<!-- <div>Form Value : {{employeeform.value | json}}</div> -->
 <div class="container">
-
-    <form #employeeform = 'ngForm' class="form">
+    <!-- #employeeform = 'ngForm' -->
+    <form [formGroup]="employeeForm" class="form">                             
         <div class="form-header">Employee Payroll From</div>
 
         <div class="form-content">
@@ -9,7 +9,7 @@
             <!-- Creating name section in form -->
             <mat-label class="main-tag">Name</mat-label>
             <mat-form-field class="width ml" appearance="outline">
-                <input ngModel type="text" matInput name="name">
+                <input type="text" matInput formControlName="employeeName">
             </mat-form-field>
 
             <br>
@@ -17,17 +17,17 @@
 
             <!-- Creating profile image selection section in form -->
             <mat-label class="main-tag">Profile image</mat-label>
-            <mat-radio-group ngModel class="profile-ml" name="image">
-                <mat-radio-button color="primary" value="../assets/profileimages/Ellipse -1.png">
-                    <img class="profile" src="../assets/profileimages/Ellipse -1.png" alt="1">
+            <mat-radio-group class="profile-ml" formControlName="image">
+                <mat-radio-button color="primary" value="../assets/profileimages/Ellipse -3.png">
+                    <img class="profile" src="../assets/profileimages/Ellipse -3.png" alt="1">
+                </mat-radio-button>
+
+                <mat-radio-button style="margin-left: 10px;" color="primary" value="../assets/profileimages/Ellipse -4.png">
+                    <img class="profile" src="../assets/profileimages/Ellipse -4.png" alt="2">
                 </mat-radio-button>
 
                 <mat-radio-button style="margin-left: 10px;" color="primary" value="../assets/profileimages/Ellipse -2.png">
-                    <img class="profile" src="../assets/profileimages/Ellipse -2.png" alt="2">
-                </mat-radio-button>
-
-                <mat-radio-button style="margin-left: 10px;" color="primary" value="../assets/profileimages/Ellipse -3.png">
-                    <img class="profile" src="../assets/profileimages/Ellipse -3.png" alt="3">
+                    <img class="profile" src="../assets/profileimages/Ellipse -2.png" alt="3">
                 </mat-radio-button>
 
                 <mat-radio-button style="margin-left: 10px;" color="primary" value="../assets/profileimages/Ellipse -4.png">
@@ -42,7 +42,7 @@
             <!-- Creating gender selection section -->
 
             <mat-label class="main-tag">Gender</mat-label>
-            <mat-radio-group ngModel class="Gender-ml" name="gender">
+            <mat-radio-group class="Gender-ml" formControlName="gender">
                 <mat-radio-button color="primary" value="Male">
                     <mat-label class="text">Male</mat-label>
                 </mat-radio-button>
@@ -59,7 +59,7 @@
             <!-- Creating Department selection section -->
         
             <mat-label class="main-tag">Department</mat-label>
-            <mat-radio-group ngModel class="department-ml" name="department">
+            <mat-radio-group class="department-ml" formControlName="department">
                 <mat-radio-button color="primary" value="HR">
                     <mat-label>HR</mat-label>
                 </mat-radio-button>
@@ -88,8 +88,7 @@
     
             <mat-label class="main-tag">Salary</mat-label>
             <mat-slider
-                    ngModel
-                    name="salary"
+                    formControlName="salary"
                     color="primary"
                     class="salary-ml"
                     thumbLabel
@@ -106,22 +105,22 @@
             <!-- Creating Start date selection section -->
     
             <mat-label class="main-tag">Start Date</mat-label>
-            <mat-form-field class="date-ml" appearance="fill" name="startDate">
+            <mat-form-field class="date-ml" appearance="fill">
                 <mat-label>Choose a date</mat-label>
-                <input ngModel name="startDate" matInput [matDatepicker]="picker">
+                <input matInput [matDatepicker]="picker" formControlName="date">
                 <mat-hint>MM/DD/YYYY</mat-hint>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
             
-            <br>
+            <br> 
             <br>
     
             <!-- Creating Note section -->
     
             <mat-label class="main-tag">Note</mat-label>
             <mat-form-field class="Note-ml" appearance="outline">
-                <textarea ngModel matInput class="input" style="height:40px" name="note"></textarea>
+                <textarea matInput class="input" style="height:40px" formControlName="note"></textarea>
             </mat-form-field>
     
             <br>
@@ -130,7 +129,7 @@
                 <button class="cancel" routerLink="/dashboard" mat-raised-button>Cancel</button>
     
                 <div class="right-buttons">
-                    <button class="submit"  (click)="insert(employeeform.value)" type="submit" mat-raised-button>Submit</button>
+                    <button class="submit"  (click)="insert()" type="submit" mat-raised-button>Submit</button>
                     <button class="reset" type="reset"mat-raised-button >Reset</button>
                 </div>
     
